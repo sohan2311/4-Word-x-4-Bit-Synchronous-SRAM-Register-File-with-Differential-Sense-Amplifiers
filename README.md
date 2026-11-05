@@ -75,88 +75,7 @@ Each column represents one bit of the 4-bit data word and consists of:
 
 ### System Architecture Diagram
 
-![System Architecture Diagram](images/System%20Architechture%20.png)
-
-```mermaid
-flowchart TD
-    subgraph Inputs ["Control & Address Inputs"]
-        ADDR["Address Bus: A[1:0]"]
-        CTRL["Control Signals: PRE_bar, WE, SAE"]
-        DIN["Data In Bus: DIN[3:0]"]
-    end
-
-    subgraph Row_Control ["Row Decode & Wordline Generation"]
-        DEC["2-to-4 Row Address Decoder"]
-        WL0["WL[0] (Word 0 Select)"]
-        WL1["WL[1] (Word 1 Select)"]
-        WL2["WL[2] (Word 2 Select)"]
-        WL3["WL[3] (Word 3 Select)"]
-    end
-
-    subgraph Memory_Array ["4-Word x 4-Bit 6T SRAM Core Matrix"]
-        direction TB
-        subgraph Col0 ["Column 0 (Bit 0)"]
-            C00["Cell (0,0)"]
-            C10["Cell (1,0)"]
-            C20["Cell (2,0)"]
-            C30["Cell (3,0)"]
-            BL0["BL0 / BL0_bar"]
-        end
-        subgraph Col1 ["Column 1 (Bit 1)"]
-            C01["Cell (0,1)"]
-            C11["Cell (1,1)"]
-            C21["Cell (2,1)"]
-            C31["Cell (3,1)"]
-            BL1["BL1 / BL1_bar"]
-        end
-        subgraph Col2 ["Column 2 (Bit 2)"]
-            C02["Cell (0,2)"]
-            C12["Cell (1,2)"]
-            C22["Cell (2,2)"]
-            C32["Cell (3,2)"]
-            BL2["BL2 / BL2_bar"]
-        end
-        subgraph Col3 ["Column 3 (Bit 3)"]
-            C03["Cell (0,3)"]
-            C13["Cell (1,3)"]
-            C23["Cell (2,3)"]
-            C33["Cell (3,3)"]
-            BL3["BL3 / BL3_bar"]
-        end
-    end
-
-    subgraph Periphery_Top ["Bitline Conditioning"]
-        PRE["Precharge & Equalization Units (4x)"]
-    end
-
-    subgraph Periphery_Bottom ["Read & Write Column Circuitry"]
-        WD["Write Drivers (4x) [DIN0..DIN3, WE]"]
-        SA["Differential Sense Amplifiers (4x) [SAE]"]
-        DOUT["Data Output Bus: DOUT[3:0]"]
-    end
-
-    %% Routing
-    ADDR --> DEC
-    DEC --> WL0
-    DEC --> WL1
-    DEC --> WL2
-    DEC --> WL3
-
-    WL0 -.-> C00 & C01 & C02 & C03
-    WL1 -.-> C10 & C11 & C12 & C13
-    WL2 -.-> C20 & C21 & C22 & C23
-    WL3 -.-> C30 & C31 & C32 & C33
-
-    CTRL --> PRE
-    CTRL --> WD
-    CTRL --> SA
-
-    PRE ==> Col0 & Col1 & Col2 & Col3
-    DIN ==> WD
-    WD ==> Col0 & Col1 & Col2 & Col3
-    Col0 & Col1 & Col2 & Col3 ==> SA
-    SA ==> DOUT
-```
+![System Architecture Diagram](images/System_Architecture.png)
 
 ---
 
@@ -629,7 +548,7 @@ The physical implementation was performed following industry-standard deep sub-m
 │   ├── write_driver/                            # Write Driver Circuit [layout, schematic, symbol]
 │   └── write_driver_tb/                         # Write Driver Testbench [schematic]
 └── images/                                       # High-Resolution Visual Records (56+ Files)
-    ├── System Architechture .png                # Full System Block & Architecture Diagram
+    ├── System_Architecture.png                  # Full System Block & Architecture Diagram
     ├── 01_inverter/                             # Inverter Schematic, TB, Output, Layouts
     ├── 02_nor_gate/                             # NOR Gate Schematic, TB, Output, Layouts
     ├── 03_row_decoder/                          # Row Decoder Schematic, TB, Output, Layouts
