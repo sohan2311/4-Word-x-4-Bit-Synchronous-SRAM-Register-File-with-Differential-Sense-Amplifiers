@@ -1,0 +1,15 @@
+# Cadence temporary, lock and backup files
+*.cdslck*
+*.oa-
+*.dm-
+*~
+*.log
+*.err
+cds.log*
+pvs*.log
+assura*.log
+
+# OS generated files
+.DS_Store
+Thumbs.db
+desktop.ini

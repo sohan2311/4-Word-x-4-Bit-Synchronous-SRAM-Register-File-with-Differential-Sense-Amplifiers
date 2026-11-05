@@ -1,0 +1,5 @@
+# Cadence Virtuoso Library Definition File (cds.lib)
+# Project: 4-Word x 4-Bit Synchronous SRAM Register File
+# Technology: gpdk180 (Cadence Generic 180nm CMOS PDK)
+
+DEFINE SRAM_Register_File ./SRAM_Register_File
