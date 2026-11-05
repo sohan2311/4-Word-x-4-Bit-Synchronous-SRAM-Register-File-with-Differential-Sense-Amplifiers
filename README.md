@@ -75,6 +75,8 @@ Each column represents one bit of the 4-bit data word and consists of:
 
 ### System Architecture Diagram
 
+![System Architecture Diagram](images/System%20Architechture%20.png)
+
 ```mermaid
 flowchart TD
     subgraph Inputs ["Control & Address Inputs"]
@@ -602,7 +604,7 @@ The physical implementation was performed following industry-standard deep sub-m
 ## Repository File Hierarchy
 
 ```
-4-Word-x-4-Bit-Synchronous-SRAM-Register-File/
+4-Word x 4-Bit Synchronous SRAM Register File with Differential Sense Amplifiers/
 ├── README.md                                    # Comprehensive Project Report and Documentation
 ├── cds.lib                                      # Cadence Virtuoso Library Definition File
 ├── .gitignore                                   # Git configuration ignoring lock & temp files
@@ -626,7 +628,8 @@ The physical implementation was performed following industry-standard deep sub-m
 │   ├── sram_final_4_bit_tb/                     # Top-Level 4×4 SRAM Testbench [schematic]
 │   ├── write_driver/                            # Write Driver Circuit [layout, schematic, symbol]
 │   └── write_driver_tb/                         # Write Driver Testbench [schematic]
-└── images/                                       # High-Resolution Visual Records (55+ Files)
+└── images/                                       # High-Resolution Visual Records (56+ Files)
+    ├── System Architechture .png                # Full System Block & Architecture Diagram
     ├── 01_inverter/                             # Inverter Schematic, TB, Output, Layouts
     ├── 02_nor_gate/                             # NOR Gate Schematic, TB, Output, Layouts
     ├── 03_row_decoder/                          # Row Decoder Schematic, TB, Output, Layouts
