@@ -780,7 +780,7 @@ I express my deepest gratitude and sincere appreciation to:
 * **Dr. Rangababu P**, for his inspiring guidance, scholarly advice, technical critique, and continuous encouragement throughout the conception, design, and physical verification of this SRAM project.
 * The **VLSI and Microelectronics Laboratory**, Department of Electronics and Communication Engineering, for providing high-performance computing clusters and infrastructure.
 * **Cadence Design Systems**, for the comprehensive Electronic Design Automation (EDA) suite including **Virtuoso Schematic Editor**, **Virtuoso Layout Suite XL**, **Spectre Circuit Simulator**, **Assura DRC/LVS**, and **QRC Extraction tools**.
-* Faculty members, research scholars, and peers in the microelectronics division for their insightful discussions and support.
+* Faculty members, research scholars, and peers in the VLSI & Microelectronics Division at Dept of ECE , IIIT Kurnool for their insightful discussions and support.
 
 ---
 
@@ -788,5 +788,6 @@ I express my deepest gratitude and sincere appreciation to:
 
 * **Author**: Sohan Maity
 * **Roll Number**: 523EC0001
-* **Program**: M.Tech in VLSI Design & Microelectronics
+* **Program**: VLSI & Microelectronics ( Dept of ECE , IIIT Kurnool )
 * **GitHub Profile**: [@sohan2311](https://github.com/sohan2311)
+* **Email ID**: (523ec0001@iiitk.ac.in / sohan.maity2311@gmail.com)
