@@ -161,9 +161,11 @@ Full rail-to-rail swing ($0\text{ V}$ to $1.8\text{ V}$) with sharp switching ch
 #### Physical Layout Design
 Custom layout with matched poly routing, guard rings, $N$-well substrate taps, and minimum parasitic area.
 
-| Virtuoso Dark Background | Virtuoso White Background |
-| :---: | :---: |
-| ![Inverter Layout Dark](images/01_inverter/Inverter%20Layout.png) | ![Inverter Layout White](images/01_inverter/Inverter%20White%20Background%20Layout.png) |
+##### Physical Layout (Standard Dark Background)
+![Inverter Layout Dark](images/01_inverter/Inverter%20Layout.png)
+
+##### Physical Layout (White Background View)
+![Inverter Layout White](images/01_inverter/Inverter%20White%20Background%20Layout.png)
 
 * **Sign-Off Status**: Assura DRC Clean (0 errors), Assura LVS 100% matched, Parasitic RC Extracted.
 
@@ -194,9 +196,11 @@ Clean transient verification showing output HIGH ($1.8\text{ V}$) strictly when 
 #### Physical Layout Design
 Symmetric poly gates, compact active diffusion sharing to minimize drain junction capacitance, and continuous power rails.
 
-| Virtuoso Dark Background | Virtuoso White Background |
-| :---: | :---: |
-| ![NOR Gate Layout Dark](images/02_nor_gate/2%20input%20NOR%20gate%20Layout.png) | ![NOR Gate Layout White](images/02_nor_gate/2%20input%20NOR%20Gate%20White%20Background%20Layout.png) |
+##### Physical Layout (Standard Dark Background)
+![NOR Gate Layout Dark](images/02_nor_gate/2%20input%20NOR%20gate%20Layout.png)
+
+##### Physical Layout (White Background View)
+![NOR Gate Layout White](images/02_nor_gate/2%20input%20NOR%20Gate%20White%20Background%20Layout.png)
 
 * **Sign-Off Status**: Assura DRC Clean (0 errors), Assura LVS 100% matched, Parasitic RC Extracted.
 
@@ -231,9 +235,11 @@ Waveforms confirm exact 1-of-4 decoding with fast propagation delay from address
 #### Physical Layout Design
 Pitch-matched layout aligned with the row pitch of the SRAM core matrix to ensure direct horizontal wordline routing in Metal2/Metal3 without dogleg detours.
 
-| Virtuoso Dark Background | Virtuoso White Background |
-| :---: | :---: |
-| ![Decoder Layout Dark](images/03_row_decoder/Decoder%202%20to%204%20Layout.png) | ![Decoder Layout White](images/03_row_decoder/Decoder%202%20to%204%20White%20Background%20Layout.png) |
+##### Physical Layout (Standard Dark Background)
+![Decoder Layout Dark](images/03_row_decoder/Decoder%202%20to%204%20Layout.png)
+
+##### Physical Layout (White Background View)
+![Decoder Layout White](images/03_row_decoder/Decoder%202%20to%204%20White%20Background%20Layout.png)
 
 * **Sign-Off Status**: Assura DRC Clean (0 errors), Assura LVS 100% matched, Parasitic RC Extracted.
 
@@ -255,24 +261,33 @@ Complete transistor schematic showing the cross-coupled inverter core and wordli
 #### Testbench Circuit Setups
 Multiple testbenches were constructed to verify: (1) Transient hold and read stability, (2) Multi-cycle read and write operations, and (3) Read discharge behavior under bitline load.
 
-| Static / Transient Testbench | Read & Write Operation Testbench | Read Operation Loaded Circuit |
-| :---: | :---: | :---: |
-| ![SRAM Cell TB 1](images/04_sram_cell_6t/6%20T%20SRAM%20Cell%20Testbench.png) | ![SRAM Cell TB 2](images/04_sram_cell_6t/Testbench%20to%20Test%20SRAM%20Read%20Write%20Operation.png) | ![SRAM Cell TB 3](images/04_sram_cell_6t/Read%20operation%20SRAM%20Cell%20Circuit.png) |
+##### Static & Transient Testbench
+![SRAM Cell TB 1](images/04_sram_cell_6t/6%20T%20SRAM%20Cell%20Testbench.png)
+
+##### Read & Write Operation Testbench
+![SRAM Cell TB 2](images/04_sram_cell_6t/Testbench%20to%20Test%20SRAM%20Read%20Write%20Operation.png)
+
+##### Read Operation Loaded Circuit
+![SRAM Cell TB 3](images/04_sram_cell_6t/Read%20operation%20SRAM%20Cell%20Circuit.png)
 
 #### Simulation Outputs
 * **Dynamic Read & Write Cycles**: Demonstrating successful non-destructive read operations and state flipping during writes.
 * **Transient Stability**: Preserving stored data indefinitely in hold mode with zero static gate leakage dissipation.
 
-| Transient 6T Response | Read and Write Operation Waveforms |
-| :---: | :---: |
-| ![SRAM Cell Output 1](images/04_sram_cell_6t/SRAM%20Cell%20Output.png) | ![SRAM Cell Output 2](images/04_sram_cell_6t/Read%20and%20Write%20Operation%20for%20the%206T%20SRAM%20Cell%20.png) |
+##### Transient 6T Cell Response Waveform
+![SRAM Cell Output 1](images/04_sram_cell_6t/SRAM%20Cell%20Output.png)
+
+##### Read and Write Operation Dynamic Waveforms
+![SRAM Cell Output 2](images/04_sram_cell_6t/Read%20and%20Write%20Operation%20for%20the%206T%20SRAM%20Cell%20.png)
 
 #### Physical Layout Design
 Highly optimized symmetrical layout featuring thin-cell topology, shared contact diffusion for $V_{DD}$ and $GND$, and vertical bitline / horizontal wordline routing tracks.
 
-| Virtuoso Dark Background | Virtuoso White Background |
-| :---: | :---: |
-| ![6T Cell Layout Dark](images/04_sram_cell_6t/6%20T%20SRAM%20Cell%20Layout.png) | ![6T Cell Layout White](images/04_sram_cell_6t/SRAM%20Cell%206T%20White%20Background%20Layout.png) |
+##### Physical Layout (Standard Dark Background)
+![6T Cell Layout Dark](images/04_sram_cell_6t/6%20T%20SRAM%20Cell%20Layout.png)
+
+##### Physical Layout (White Background View)
+![6T Cell Layout White](images/04_sram_cell_6t/SRAM%20Cell%206T%20White%20Background%20Layout.png)
 
 * **Sign-Off Status**: Assura DRC Clean (0 errors), Assura LVS 100% matched, Parasitic RC Extracted.
 
@@ -301,16 +316,23 @@ Testbench evaluating precharge recovery time and equalization speed across loade
 * Rapid bitline pull-up recovery from $0\text{ V}$ to $1.8\text{ V}$ within hundreds of picoseconds.
 * Full integration waveforms showing periodic precharge assertion between read access events.
 
-| Standalone Precharge Response | Coupled Cell & Precharge Circuit | Full Read Waveforms with Precharge |
-| :---: | :---: | :---: |
-| ![Precharge Output](images/05_precharge_unit/Pre%20Charge%20Unit.png) | ![Read Precharge Circuit](images/05_precharge_unit/Read%20operation%20using%20SRAM%20Cell%20and%20PreCharge%20unit.png) | ![Read Full Waveforms](images/05_precharge_unit/Read%20operation%20full%20with%20SRAM%20Cell%20and%20Pre%20CHarge%20Unit.png) |
+##### Standalone Precharge Characteristic Response
+![Precharge Output](images/05_precharge_unit/Pre%20Charge%20Unit.png)
+
+##### Read Operation Circuit with 6T Cell & Precharge Unit
+![Read Precharge Circuit](images/05_precharge_unit/Read%20operation%20using%20SRAM%20Cell%20and%20PreCharge%20unit.png)
+
+##### Full Read Operation Waveforms with Precharge Cycling
+![Read Full Waveforms](images/05_precharge_unit/Read%20operation%20full%20with%20SRAM%20Cell%20and%20Pre%20CHarge%20Unit.png)
 
 #### Physical Layout Design
 Pitch-matched layout placed at the top boundary of each bitline column.
 
-| Virtuoso Dark Background | Virtuoso White Background |
-| :---: | :---: |
-| ![Precharge Layout Dark](images/05_precharge_unit/Precharge%20Unit%20Layout.png) | ![Precharge Layout White](images/05_precharge_unit/Pre%20Charge%20Unit%20White%20Background%20Layout.png) |
+##### Physical Layout (Standard Dark Background)
+![Precharge Layout Dark](images/05_precharge_unit/Precharge%20Unit%20Layout.png)
+
+##### Physical Layout (White Background View)
+![Precharge Layout White](images/05_precharge_unit/Pre%20Charge%20Unit%20White%20Background%20Layout.png)
 
 * **Sign-Off Status**: Assura DRC Clean (0 errors), Assura LVS 100% matched, Parasitic RC Extracted.
 
@@ -342,9 +364,11 @@ Clear rail-to-rail complementary bitline switching when $WE$ is asserted, and hi
 #### Physical Layout Design
 Compact layout featuring wide NMOS pull-down transistors for minimal ground resistance.
 
-| Virtuoso Dark Background | Virtuoso White Background |
-| :---: | :---: |
-| ![Write Driver Layout Dark](images/06_write_driver/Write%20Driver%20Layout.png) | ![Write Driver Layout White](images/06_write_driver/Wire%20Driver%20white%20background%20Layout.png) |
+##### Physical Layout (Standard Dark Background)
+![Write Driver Layout Dark](images/06_write_driver/Write%20Driver%20Layout.png)
+
+##### Physical Layout (White Background View)
+![Write Driver Layout White](images/06_write_driver/Wire%20Driver%20white%20background%20Layout.png)
 
 * **Sign-Off Status**: Assura DRC Clean (0 errors), Assura LVS 100% matched, Parasitic RC Extracted.
 
@@ -376,9 +400,11 @@ Transient waveforms showing sharp output latching to $1.8\text{ V}$ or $0\text{ 
 #### Physical Layout Design
 Carefully mirrored and interdigitated layout to minimize transistor mismatch and reduce input-referred DC offset voltage.
 
-| Virtuoso Dark Background | Virtuoso White Background |
-| :---: | :---: |
-| ![Sense Amp Layout Dark](images/07_sense_amplifier/Sense%20Amplifier%20Layout.png) | ![Sense Amp Layout White](images/07_sense_amplifier/Sense%20Amplifier%20White%20Background%20Layout.png) |
+##### Physical Layout (Standard Dark Background)
+![Sense Amp Layout Dark](images/07_sense_amplifier/Sense%20Amplifier%20Layout.png)
+
+##### Physical Layout (White Background View)
+![Sense Amp Layout White](images/07_sense_amplifier/Sense%20Amplifier%20White%20Background%20Layout.png)
 
 * **Sign-Off Status**: Assura DRC Clean (0 errors), Assura LVS 100% matched, Parasitic RC Extracted.
 
@@ -410,9 +436,11 @@ Multi-wordline read/write verification waveforms across all 4 words.
 #### Physical Layout Design
 Vertical abutment of 4 6T cells sharing continuous $V_{DD}$, $GND$, and $N$-well regions for maximum silicon area density.
 
-| Virtuoso Dark Background | Virtuoso White Background |
-| :---: | :---: |
-| ![1-Bit Array Layout Dark](images/08_sram_core_1bit_column/sram%201%20bit%20core%20array.png) | ![1-Bit Array Layout White](images/08_sram_core_1bit_column/4%20word%20x%201%20bit%20SRAM%20Core%20Array%20White%20Background%20Layout.png) |
+##### Physical Layout (Standard Dark Background)
+![1-Bit Array Layout Dark](images/08_sram_core_1bit_column/sram%201%20bit%20core%20array.png)
+
+##### Physical Layout (White Background View)
+![1-Bit Array Layout White](images/08_sram_core_1bit_column/4%20word%20x%201%20bit%20SRAM%20Core%20Array%20White%20Background%20Layout.png)
 
 * **Sign-Off Status**: Assura DRC Clean (0 errors), Assura LVS 100% matched, Parasitic RC Extracted.
 
@@ -441,25 +469,37 @@ Transient simulation results over full multi-word write/read cycles:
 * **Output 2**: Focused verification showing exact timing correlation between address decoding, precharge de-assertion, write drive, and sense amplifier latch output.
 * **Waveform Detail**: Input data ($DIN$), Address ($A_0, A_1$), and Valid Output ($DOUT$) timing alignment.
 
-| Full Multi-Cycle Read/Write Waveform 1 | Multi-Cycle Read/Write Waveform 2 | Detailed Address, DIN & DOUT Waveforms |
-| :---: | :---: | :---: |
-| ![Top SRAM Output 1](images/09_top_sram_4x4_register_file/4%20bit%20SRAM%20Output%201.png) | ![Top SRAM Output 2](images/09_top_sram_4x4_register_file/4%20Bit%20SRAM%20Out%202.png) | ![Top SRAM DIN DOUT Detail](images/09_top_sram_4x4_register_file/A%20DIN%20OUT%20Output%20Waveform.png) |
+##### Full Multi-Cycle Read/Write Transient Waveform (Run 1)
+![Top SRAM Output 1](images/09_top_sram_4x4_register_file/4%20bit%20SRAM%20Output%201.png)
+
+##### Multi-Cycle Read/Write Transient Waveform (Run 2)
+![Top SRAM Output 2](images/09_top_sram_4x4_register_file/4%20Bit%20SRAM%20Out%202.png)
+
+##### Detailed Address Bus, DIN & DOUT Timing Correlation
+![Top SRAM DIN DOUT Detail](images/09_top_sram_4x4_register_file/A%20DIN%20OUT%20Output%20Waveform.png)
 
 #### ADE ViVA Direct Simulation Reports
 Direct simulation printouts from Cadence Virtuoso Analog Design Environment (ADE) ViVA waveform viewer documenting transient signal dynamics ($V_{DD} = 1.8\text{ V}$, $0\text{ to }1.0\,\mu\text{s}$):
 
-| ADE ViVA Waveform Report 1 | ADE ViVA Waveform Report 2 | ADE ViVA Waveform Report 3 |
-| :---: | :---: | :---: |
-| ![ADE Report 1](images/09_top_sram_4x4_register_file/4_bit_SRAM_Register_File_Output_page_1.png) | ![ADE Report 2](images/09_top_sram_4x4_register_file/4_bit_SRAM_Register_File_Output_Final_page_1.png) | ![ADE Report 3](images/09_top_sram_4x4_register_file/4_bit_SRAM_Register_File_Output_Final2_page_1.png) |
+##### ADE ViVA Simulation Waveform Report 1
+![ADE Report 1](images/09_top_sram_4x4_register_file/4_bit_SRAM_Register_File_Output_page_1.png)
+
+##### ADE ViVA Simulation Waveform Report 2
+![ADE Report 2](images/09_top_sram_4x4_register_file/4_bit_SRAM_Register_File_Output_Final_page_1.png)
+
+##### ADE ViVA Simulation Waveform Report 3
+![ADE Report 3](images/09_top_sram_4x4_register_file/4_bit_SRAM_Register_File_Output_Final2_page_1.png)
 
 *(Original PDF format documentation available: [`Output Report 1`](images/09_top_sram_4x4_register_file/4_bit_SRAM_Register_File_Output.pdf), [`Output Report 2`](images/09_top_sram_4x4_register_file/4_bit_SRAM_Register_File_Output_Final.pdf), [`Output Report 3`](images/09_top_sram_4x4_register_file/4_bit_SRAM_Register_File_Output_Final2.pdf))*
 
 #### Physical Layout Design
 Full-chip monolithic custom layout integrating the row decoder on the left, four precharge units at the top, the 4×4 cell array in the center, and the four write drivers and differential sense amplifiers at the bottom.
 
-| Full Chip Layout (Wide View) | Full Chip Layout (Detailed Routing) |
-| :---: | :---: |
-| ![Top Macro Layout Wide](images/09_top_sram_4x4_register_file/4%20word%20x%204%20Bit%20SRAM%20Final%20Layout.png) | ![Top Macro Layout Detail](images/09_top_sram_4x4_register_file/4%20word%20x%204%20bit%20Synchronous%20SRAM%20Register%20File%20Layout.png) |
+##### Monolithic Macro Physical Layout (Wide View)
+![Top Macro Layout Wide](images/09_top_sram_4x4_register_file/4%20word%20x%204%20Bit%20SRAM%20Final%20Layout.png)
+
+##### Monolithic Macro Physical Layout (Detailed Routing & Pin Views)
+![Top Macro Layout Detail](images/09_top_sram_4x4_register_file/4%20word%20x%204%20bit%20Synchronous%20SRAM%20Register%20File%20Layout.png)
 
 * **Sign-Off Status**: Assura DRC Clean (0 errors), Assura LVS 100% matched, Parasitic RC Extracted.
 
