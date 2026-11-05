@@ -9,7 +9,7 @@
 [![Parasitic Extraction](https://img.shields.io/badge/RC%20Extraction-AV%20Extracted%20Clean-success.svg)]()
 [![Status](https://img.shields.io/badge/Verification-Fully%20Verified%20(Pre%20%26%20Post--Layout)-brightgreen.svg)]()
 
-A high-performance, fully custom **4-Word x 4-Bit (16-Bit) Synchronous Static Random-Access Memory (SRAM) Register File** designed and physically implemented in **Cadence Virtuoso IC6.1.x** using the **Generic 180nm CMOS Process Design Kit (gpdk180)** operating at a nominal supply voltage of **$V_{DD} = 1.8\text{ V}$**. 
+A high-performance, full custom **4-Word x 4-Bit (16-Bit) Synchronous Static Random-Access Memory (SRAM) Register File** designed and physically implemented in **Cadence Virtuoso IC6.1.x** using the **Generic 180nm CMOS Process Design Kit (gpdk180)** operating at a nominal supply voltage of **$V_{DD} = 1.8\text{ V}$**. 
 
 The design incorporates balanced 6-Transistor (6T) SRAM bitcells, a low-latency 2-to-4 row address decoder, high-drive tri-state write drivers, a bitline precharge/equalization network, and fast regenerative differential latch-type sense amplifiers to achieve low read latency, high noise immunity, and energy-efficient memory operations. The full custom layout is signed off with **Assura DRC (Design Rule Checking)**, **Assura LVS (Layout Versus Schematic)** matching with 100% equivalence, and **Assura RCX / QRC Parasitic RC Extraction** generating clean `av_extracted` post-layout views.
 
