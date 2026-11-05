@@ -1,4 +1,4 @@
-# 4-Word × 4-Bit Synchronous SRAM Register File with Differential Sense Amplifiers
+# 4-Word x 4-Bit Synchronous SRAM Register File with Differential Sense Amplifiers
 
 [![Cadence Virtuoso](https://img.shields.io/badge/EDA-Cadence%20Virtuoso%20IC6.1-blue.svg)](https://www.cadence.com)
 [![PDK](https://img.shields.io/badge/PDK-GPDK%20180nm-green.svg)](https://www.cadence.com)
@@ -646,8 +646,8 @@ To open, inspect, and simulate this design in your local Cadence Virtuoso enviro
 
 1. **Clone the Repository**:
    ```bash
-   git clone https://github.com/sohan2311/4-Word-x-4-Bit-Synchronous-SRAM-Register-File.git
-   cd 4-Word-x-4-Bit-Synchronous-SRAM-Register-File
+   git clone https://github.com/sohan2311/4-Word-x-4-Bit-Synchronous-SRAM-Register-File-with-Differential-Sense-Amplifiers.git
+   cd "4-Word x 4-Bit Synchronous SRAM Register File with Differential Sense Amplifiers"
    ```
 
 2. **Configure Cadence Environment**:
