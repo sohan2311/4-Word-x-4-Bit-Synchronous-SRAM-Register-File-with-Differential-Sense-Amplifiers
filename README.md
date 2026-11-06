@@ -695,9 +695,9 @@ The physical implementation was performed following industry-standard deep sub-m
 * **View Generated**: `av_extracted` view.
 * **Post-Layout Validation**: Back-annotated post-layout simulations in ADE-L confirmed that bitline parasitic wire capacitances ($C_{wire}$) and access gate parasitic resistances ($R_{wire}$) do not violate read differential sensing margins or write completion times.
 
-### 3. GDS File Export (sram_final_4_bit.gds) (./sram_final_4_bit.gds)
+### 3. GDS File Export (sram_final_4_bit.gds)
 * **GDS File Exported** : Cleanly with 0 errors and 0 warnings .
-* For verification of clean GDS Extraction check - (./strmOut.log)
+* For verification of clean GDS Extraction check - " strmOut.log "
 
 ---
 
