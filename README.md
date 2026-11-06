@@ -11,7 +11,7 @@
 
 A high-performance, full custom **4-Word x 4-Bit (16-Bit) Synchronous Static Random-Access Memory (SRAM) Register File** designed and physically implemented in **Cadence Virtuoso IC6.1.x** using the **Generic 180nm CMOS Process Design Kit (gpdk180)** operating at a nominal supply voltage of **$V_{DD} = 1.8\text{ V}$**. 
 
-The design incorporates balanced 6-Transistor (6T) SRAM bitcells, a low-latency 2-to-4 row address decoder, high-drive tri-state write drivers, a bitline precharge/equalization network, and fast regenerative differential latch-type sense amplifiers to achieve low read latency, high noise immunity, and energy-efficient memory operations. The full custom layout is signed off with **Assura DRC (Design Rule Checking)**, **Assura LVS (Layout Versus Schematic)** matching with 100% equivalence, and **Assura RCX / QRC Parasitic RC Extraction** generating clean `av_extracted` post-layout views.
+The design incorporates balanced 6-Transistor (6T) SRAM bitcells, a low-latency 2-to-4 row address decoder, high-drive tri-state write drivers, a bitline precharge/equalization network, and fast regenerative differential latch-type sense amplifiers to achieve low read latency, high noise immunity, and energy-efficient memory operations. The full custom layout is signed off with **Assura DRC (Design Rule Checking)**, **Assura LVS (Layout Versus Schematic)** matching with 100% equivalence, and **Assura RCX / QRC Parasitic RC Extraction** generating clean `av_extracted` post-layout views and Finally Exported **GDS File** and **Log Files** with 0 errors.
 
 ---
 
@@ -694,6 +694,10 @@ The physical implementation was performed following industry-standard deep sub-m
 * **Extraction Mode**: Lumped and distributed Parasitic Resistance ($R$) and Capacitance ($C$).
 * **View Generated**: `av_extracted` view.
 * **Post-Layout Validation**: Back-annotated post-layout simulations in ADE-L confirmed that bitline parasitic wire capacitances ($C_{wire}$) and access gate parasitic resistances ($R_{wire}$) do not violate read differential sensing margins or write completion times.
+
+### 3. GDS File Export (sram_final_4_bit.gds) (./sram_final_4_bit.gds)
+* **GDS File Exported** : Cleanly with 0 errors and 0 warnings .
+* For verification of clean GDS Extraction check - (./strmOut.log)
 
 ---
 
