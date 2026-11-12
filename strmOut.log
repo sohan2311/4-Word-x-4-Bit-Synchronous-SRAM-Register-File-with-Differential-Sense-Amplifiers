@@ -15,7 +15,7 @@ INFO (XSTRM-217): Reading the layer map file, /home/install/FOUNDRY/analog/180nm
 INFO (XSTRM-162): You have not used the '-viaMap' option. If the OpenAccess design has native oaVia instances, use the '-viaMap' option for preserving oaVia instances in a XStream Out - XStream In round trip. Using the '-viaMap' option improves performance and VM usage of applications using the Streamed-In design.
 
 Summary of Options :
-library                                 SRAM_AUTO
+library                                 SRAM_Register_File
 strmFile                                sram_final_4_bit.gds
 topCell                                 sram_final_4_bit
 view                                    layout
