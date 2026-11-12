@@ -27,15 +27,15 @@ convertDot                              node
 
 INFO (XSTRM-223): 1. Translating cellView gpdk180/pmos/layout as STRUCTURE pmos_CDNS_793954044460.
 INFO (XSTRM-223): 2. Translating cellView gpdk180/nmos/layout as STRUCTURE nmos_CDNS_793954044461.
-INFO (XSTRM-223): 3. Translating cellView SRAM_AUTO/inverter/layout as STRUCTURE inverter.
-INFO (XSTRM-223): 4. Translating cellView SRAM_AUTO/2_input_NOR/layout as STRUCTURE 2_input_NOR.
-INFO (XSTRM-223): 5. Translating cellView SRAM_AUTO/row_decoder_2to4/layout as STRUCTURE row_decoder_2to4.
-INFO (XSTRM-223): 6. Translating cellView SRAM_AUTO/sram_cell_6t/layout as STRUCTURE sram_cell_6t.
-INFO (XSTRM-223): 7. Translating cellView SRAM_AUTO/precharge_unit/layout as STRUCTURE precharge_unit.
-INFO (XSTRM-223): 8. Translating cellView SRAM_AUTO/write_driver/layout as STRUCTURE write_driver.
-INFO (XSTRM-223): 9. Translating cellView SRAM_AUTO/sense_amp/layout as STRUCTURE sense_amp.
-INFO (XSTRM-223): 10. Translating cellView SRAM_AUTO/sram_core_array/layout as STRUCTURE sram_core_array.
-INFO (XSTRM-223): 11. Translating cellView SRAM_AUTO/sram_final_4_bit/layout as STRUCTURE sram_final_4_bit.
+INFO (XSTRM-223): 3. Translating cellView SRAM_Register_File/inverter/layout as STRUCTURE inverter.
+INFO (XSTRM-223): 4. Translating cellView SRAM_Register_File/2_input_NOR/layout as STRUCTURE 2_input_NOR.
+INFO (XSTRM-223): 5. Translating cellView SRAM_Register_File/row_decoder_2to4/layout as STRUCTURE row_decoder_2to4.
+INFO (XSTRM-223): 6. Translating cellView SRAM_Register_File/sram_cell_6t/layout as STRUCTURE sram_cell_6t.
+INFO (XSTRM-223): 7. Translating cellView SRAM_Register_File/precharge_unit/layout as STRUCTURE precharge_unit.
+INFO (XSTRM-223): 8. Translating cellView SRAM_Register_File/write_driver/layout as STRUCTURE write_driver.
+INFO (XSTRM-223): 9. Translating cellView SRAM_Register_File/sense_amp/layout as STRUCTURE sense_amp.
+INFO (XSTRM-223): 10. Translating cellView SRAM_Register_File/sram_core_array/layout as STRUCTURE sram_core_array.
+INFO (XSTRM-223): 11. Translating cellView SRAM_Register_File/sram_final_4_bit/layout as STRUCTURE sram_final_4_bit.
 
 Summary of Objects Translated:
 	Scalar Instances:                       48
