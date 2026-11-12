@@ -4,6 +4,7 @@
 *.dm-
 *~
 *.log
+!strmOut.log
 *.err
 cds.log*
 pvs*.log
