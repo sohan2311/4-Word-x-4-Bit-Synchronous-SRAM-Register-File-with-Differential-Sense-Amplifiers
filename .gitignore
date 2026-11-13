@@ -14,3 +14,17 @@ assura*.log
 .DS_Store
 Thumbs.db
 desktop.ini
+
+# LaTeX auxiliary files (keep only final PDF)
+*.tex
+*.aux
+*.out
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+*.toc
+
+# Python build & helper scripts
+*.py
+author_card_preview.png
+
