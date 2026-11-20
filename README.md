@@ -798,7 +798,22 @@ Macro-level standby leakage ($P_{static} = 84.60\,\text{nW}$), active dynamic sw
 | **SRAM Macro (Read)** | **208** | 193.90 | 177.90 | **185.90** | **98.90** | — | — | **84.60** | **68.42** | **11.20** | **79.71** | **14.82** | **2754.7** |
 | **SRAM Macro (Write)** | **208** | 169.50 | 156.10 | **162.80** | **81.35** | — | — | **84.60** | **68.42** | **11.20** | **79.71** | **12.98** | **2112.6** |
 
-> **Synchronous Timing Sign-Off**: `tsetup,macro = 187.51 ps` (`tsetup,DIN = 165.03 ps`) | `thold,macro = 24.23 ps` (`thold,addr = 22.62 ps`, `thold,DIN = 15.60 ps`) | `Max Skew = 74.67 ps` | `fmax = 1.98 GHz`.
+> **Synchronous Timing Sign-Off**: `tsetup,macro = 187.51 ps` | `thold,macro = 24.23 ps` | `tcd,macro = 98.90 ps` | `Max Clock Skew = 74.67 ps` | `fmax = 1.98 GHz`.
+
+#### Synchronous Setup, Hold & Clocking Constraints Summary
+| Synchronous Timing Parameter | Path / Signal Condition | Pre-Layout (ps) | Post-Layout RC (ps) | Physical Significance & Governing Formula |
+| :--- | :--- | :---: | :---: | :--- |
+| **Address Setup Time (tsetup,addr)** | Write / Capture Cycle (A0, A1 → WL) | **187.51** | 212.88 | tpd,dec (131.56 ps) + t_write,cell (55.95 ps) |
+| **Write Data Setup Time (tsetup,DIN)** | Write Cycle (DIN[3:0] → Cell Q Flip) | **165.03** | 190.61 | tpd,WD (109.08 ps) + t_write,cell (55.95 ps) |
+| **Read-to-SAE Setup Time (tsetup,SAE)** | Read Cycle (Addr → ΔVBL = 150 mV) | **156.25** | 176.22 | tpd,dec (131.56 ps) + t_develop (24.69 ps) |
+| **Governing Macro Setup (tsetup,macro)** | Worst-Case Synchronous Setup Margin | **187.51** | **212.88** | max(tsetup,addr, tsetup,DIN, tsetup,SAE) |
+| **Wordline Cut-Off Offset (Δtcut)** | WL Fall (0.90V → Vtn = 0.45V) | **15.63** | 18.00 | ((0.90 − 0.45) / 1.44) × tf (50.0 ps) |
+| **Write Data Hold Time (thold,DIN)** | Post-WL Falling Edge Data Retention | **15.60** | 17.94 | (tpHL,NOR + Δtcut) − tcd,WD |
+| **Address Hold Time (thold,addr)** | Post-Capture Address Retention | **22.62** | 26.01 | tpHL,NOR (67.60 ps) − tcd,dec (44.98 ps) |
+| **Sense-Amp Bitline Hold (thold,SA)** | Bitline Differential Hold After SAE↑ | **24.23** | 27.86 | τlatch · ln(VDD / ΔVBL) = 9.75 × 2.4849 |
+| **Governing Macro Hold (thold,macro)** | Worst-Case Synchronous Hold Margin | **24.23** | **27.86** | max(thold,DIN, thold,addr, thold,SA) |
+| **Max Clock Skew (Δtskew,max)** | Skew Tolerance Margin | **74.67** | 84.54 | tcd,macro − thold,macro = 98.90 − 24.23 |
+| **Min Cycle Period / fmax** | Full Precharge + Setup + Read Cycle | **504.22 ps / 1.98 GHz** | 577.9 ps / 1.73 GHz | Tclk,min = tpre + tsetup,macro + tpd,read |
 
 #### Chip Die Area & GDSII Layout Breakdown (`sram_final_4_bit.gds`, 1 µm = 2000 DBU)
 | GDSII Cell / Block | Instances | Width (µm) | Height (µm) | Area (µm²) | Total Share & Physical Description |
@@ -924,6 +939,7 @@ The physical implementation was performed following industry-standard deep sub-m
 |  Assura LVS            gpdk180_lvs.rul             CLEAN (100% Match) 0 Net/Dev Delta |
 |  Assura RCX / QRC      gpdk180_pcells / RCX deck   CLEAN (RC Extr.)   av_extracted    |
 |  Virtuoso XStream Out  sram_final_4_bit.gds        CLEAN (0 Errors)   Stream Level 7  |
+|  Core Die Dimensions   64.00 um x 29.50 um         1888.00 um^2       76.73% Utiliz.  |
 +---------------------------------------------------------------------------------------+
 ```
 
@@ -983,18 +999,18 @@ Status    : Translation completed with '0' error(s) and '0' warning(s) found.
 | **Peak Virtual Memory** | **9924 KB** | Stream-out footprint |
 | **Translation Status** | **CLEAN** | **0 Errors, 0 Warnings** |
 
-#### Complete Cell Hierarchy Embedded in GDSII File:
-1. `pmos_CDNS_793954044460` (GPDK 180nm PMOS Primitive)
-2. `nmos_CDNS_793954044461` (GPDK 180nm NMOS Primitive)
-3. `inverter` (CMOS Inverter Sub-Cell)
-4. `2_input_NOR` (2-Input CMOS NOR Sub-Cell)
-5. `row_decoder_2to4` (2-to-4 Address Decoder Macro)
-6. `sram_cell_6t` (6T SRAM Bitcell)
-7. `precharge_unit` (Bitline Precharge & Equalization Unit)
-8. `write_driver` (High-Drive Tri-State Write Driver)
-9. `sense_amp` (Differential Latch Sense Amplifier)
-10. `sram_core_array` (4-Word x 1-Bit Column Slice Array)
-11. `sram_final_4_bit` (Top-Level 4-Word x 4-Bit Synchronous SRAM Macro)
+#### Complete Cell Hierarchy Embedded in GDSII File (Verified Dimensions):
+1. `pmos_CDNS_793954044460` (GPDK 180nm PMOS Primitive: `2.38 µm × 3.00 µm = 7.14 µm²`)
+2. `nmos_CDNS_793954044461` (GPDK 180nm NMOS Primitive: `1.78 µm × 2.65 µm = 4.72 µm²`)
+3. `inverter` (CMOS Inverter Sub-Cell: `3.50 µm × 5.20 µm = 18.20 µm²`)
+4. `2_input_NOR` (2-Input CMOS NOR Sub-Cell: `5.30 µm × 6.00 µm = 31.80 µm²`)
+5. `row_decoder_2to4` (2-to-4 Address Decoder Macro: `12.00 µm × 21.80 µm = 261.60 µm²`)
+6. `sram_cell_6t` (6T SRAM Bitcell: `3.58 µm × 4.70 µm = 16.83 µm²`, `16× = 269.22 µm²`)
+7. `precharge_unit` (Bitline Precharge & Equalization Unit: `5.80 µm × 4.90 µm = 28.42 µm²`)
+8. `write_driver` (High-Drive Tri-State Write Driver: `5.70 µm × 5.60 µm = 31.92 µm²`)
+9. `sense_amp` (Differential Latch Sense Amplifier: `6.10 µm × 6.40 µm = 39.04 µm²`)
+10. `sram_core_array` (4-Word x 1-Bit Column Slice Array: `11.80 µm × 25.15 µm = 296.77 µm²`, `4× = 1187.08 µm²`)
+11. `sram_final_4_bit` (Top-Level Core Macro Die: **`64.00 µm × 29.50 µm = 1888.00 µm²`**)
 
 #### Instructions to Inspect the GDSII File:
 1. **Via Open-Source KLayout (Windows / Linux / macOS)**:
@@ -1017,10 +1033,11 @@ Status    : Translation completed with '0' error(s) and '0' warning(s) found.
 ```
 4-Word x 4-Bit Synchronous SRAM Register File with Differential Sense Amplifiers/
 ├── README.md                                    # Comprehensive Project Report, Calculations & Documentation
+├── sram_calculations.pdf                        # 11-Page Official Technical Calculation & Derivation Manual
 ├── sram_final_4_bit.gds                         # Tapeout-Ready GDSII Stream File (30.7 KB, 0 Errors)
 ├── strmOut.log                                  # Virtuoso XStream Out Translation Log File
 ├── cds.lib                                      # Cadence Virtuoso Library Definition File
-├── .gitignore                                   # Git configuration ignoring lock & temp files
+├── .gitignore                                   # Git configuration ignoring lock, TeX/log & temp files
 ├── SRAM_Register_File/                          # Cadence OpenAccess Clean Design Library
 │   ├── cdsinfo.tag                              # OpenAccess Library Metadata
 │   ├── sram_final_4_bit.gds                     # Design Library Copy of GDSII Stream File
@@ -1053,7 +1070,8 @@ Status    : Translation completed with '0' error(s) and '0' warning(s) found.
     ├── 06_write_driver/                         # Write Driver Schematic, TB, Output, Layouts
     ├── 07_sense_amplifier/                      # Sense Amp Schematic, TB, Output, Layouts
     ├── 08_sram_core_1bit_column/                # 1-Bit Column Schematic, TB, Output, Layouts
-    └── 09_top_sram_4x4_register_file/           # Macro Schematic, TB, Transient Outputs, PDF Reports, Macro Layouts
+    ├── 09_top_sram_4x4_register_file/           # Macro Schematic, TB, Transient Outputs, PDF Reports, Macro Layouts
+    └── calculations/                            # 11 High-Resolution Cropped Calculation Panels (01..11 PNGs)
 ```
 
 ---
