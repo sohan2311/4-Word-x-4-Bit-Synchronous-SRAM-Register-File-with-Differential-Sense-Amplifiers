@@ -1,6 +1,7 @@
 # 4-Word x 4-Bit Synchronous SRAM Register File with Differential Sense Amplifiers
 
-[![Report](https://img.shields.io/badge/Report-sram__calculations.pdf%20(10%20Pages)-blueviolet.svg)](./sram_calculations.pdf)
+[![Report](https://img.shields.io/badge/Report-sram__calculations.pdf%20(11%20Pages)-blueviolet.svg)](./sram_calculations.pdf)
+[![Die Area](https://img.shields.io/badge/Core%20Die%20Area-1888%20%C2%B5m%C2%B2%20(64%C3%9729.5%20%C2%B5m)-informational.svg)]()
 [![Cadence Virtuoso](https://img.shields.io/badge/EDA-Cadence%20Virtuoso%20IC6.1-blue.svg)](https://www.cadence.com)
 [![PDK](https://img.shields.io/badge/PDK-GPDK%20180nm-green.svg)](https://www.cadence.com)
 [![Supply Voltage](https://img.shields.io/badge/VDD-1.8V-orange.svg)]()
@@ -45,9 +46,9 @@ The design incorporates balanced 6-Transistor (6T) SRAM bitcells, a low-latency 
    - [7.2 Fundamental Equations and Formal Definitions](#72-fundamental-equations-and-formal-definitions)
    - [7.3 Step-by-Step Derivations and Numerical Calculations for Sub-Blocks](#73-step-by-step-derivations-and-numerical-calculations-for-sub-blocks)
    - [7.4 Top-Level 4-Word x 4-Bit Synchronous SRAM System Calculations](#74-top-level-4-word-x-4-bit-synchronous-sram-system-calculations)
-   - [7.5 Master Performance Summary Table (Cell-by-Cell & Full-Chip)](#75-master-performance-summary-table-cell-by-cell--full-chip)
+   - [7.5 Master Performance Summary Table & GDSII Chip Die Area](#75-master-performance-summary-table--gdsii-chip-die-area)
    - [7.6 Pre-Layout vs. Post-Layout (RC Extracted) Verification Table](#76-pre-layout-vs-post-layout-rc-extracted-verification-table)
-   - [7.7 Cadence Virtuoso ADE Calculator Syntax & Verification Equations](#77-cadence-virtuoso-ade-calculator-syntax--verification-equations)
+   - [7.7 Cadence Virtuoso ADE Calculator & SKILL Extraction Expressions](#77-cadence-virtuoso-ade-calculator--skill-extraction-expressions)
 8. [Physical Design & Sign-Off Verification (DRC, LVS, PEX & GDSII Stream)](#physical-design--sign-off-verification-drc-lvs-pex--gdsii-stream)
    - [8.1 Design Rule Checking (DRC)](#81-design-rule-checking-drc)
    - [8.2 Layout Versus Schematic (LVS)](#82-layout-versus-schematic-lvs)
@@ -73,7 +74,12 @@ The design incorporates balanced 6-Transistor (6T) SRAM bitcells, a low-latency 
 | **Total Transistor Count** | **208 Transistors** (114 NMOS / 94 PMOS) |
 | **Read Access Delay ($t_{pd,read}$)** | **$185.90\text{ ps}$** (Address Decode to Sense Amp Latch Output) |
 | **Write Access Delay ($t_{pd,write}$)** | **$162.80\text{ ps}$** (Address Decode to Internal Cell Flip) |
-| **Contamination Delay ($t_{cd,macro}$)** | **$98.90\text{ ps}$** (Minimum propagation delay / Hold-time safety) |
+| **Contamination Delay ($t_{cd,macro}$)** | **$98.90\text{ ps}$** (Minimum propagation delay / Max Clock Skew: **$74.67\text{ ps}$**) |
+| **Setup Time ($t_{setup,macro}$)** | **$187.51\text{ ps}$** (Address setup; Data setup $t_{setup,DIN} = 165.03\text{ ps}$; Read-to-SAE $= 156.25\text{ ps}$) |
+| **Hold Time ($t_{hold,macro}$)** | **$24.23\text{ ps}$** (Sense latch BL hold; Addr hold $= 22.62\text{ ps}$; DIN hold $= 15.60\text{ ps}$) |
+| **Max Operating Frequency ($f_{max}$)** | **$1.98\text{ GHz}$** ($T_{clk,min} = 504.22\text{ ps}$; Nominal benchmark: $100\text{ MHz}$) |
+| **Core Chip Die Area ($A_{die,core}$)** | **$1888.00\,\mu\text{m}^2$** (**$64.00\,\mu\text{m} \times 29.50\,\mu\text{m}$** from GDSII; **$76.73\%$** Active Packing) |
+| **Silicon & Bit Density** | **$110.2\text{ kT}/\text{mm}^2$** ($0.1102\text{ MOS}/\mu\text{m}^2$) \| **$8.47\text{ kbits}/\text{mm}^2$** |
 | **Total Average Power ($P_{avg}$)** | **$79.71\,\mu\text{W}$** (Nominal $100\text{ MHz}$ continuous cycling) |
 | **Static Standby Power ($P_{static}$)** | **$84.60\text{ nW}$** (Leakage across 208 MOSFETs in retention) |
 | **Power-Delay Product (PDP)** | **$14.82\text{ fJ}$** ($1.482 \times 10^{-14}\text{ J}$) |
@@ -682,9 +688,9 @@ As demonstrated in the ViVA waveform records, the read data perfectly replicates
 
 ## 7. Comprehensive Quantitative Timing, Power, Resistance-Capacitance (RC) & Energy Calculations
 
-> 📄 **Official Technical Calculation Report**: [**Download / View sram_calculations.pdf**](./sram_calculations.pdf) *(10-Page Comprehensive Engineering Derivation Manual)*
+> 📄 **Official Technical Calculation Report**: [**Download / View sram_calculations.pdf**](./sram_calculations.pdf) *(11-Page Comprehensive Engineering Derivation Manual)*
 
-This section provides the complete quantitative mathematical derivations, equivalent RC network models, transient timing delays ($t_{pLH}$, $t_{pHL}$, $t_{pd}$, $t_{cd}$), static and dynamic power dissipations ($P_{static}$, $P_{dynamic}$, $P_{sc}$, $P_{avg}$), Power-Delay Product (PDP), and Energy-Delay Product (EDP) for the **4-Word x 4-Bit Synchronous SRAM Register File**.
+This section provides the complete quantitative mathematical derivations, equivalent RC network models, transient timing delays ($t_{pLH}$, $t_{pHL}$, $t_{pd}$, $t_{cd}$), synchronous capture timing constraints (**$t_{setup}$** and **$t_{hold}$**), **GDSII Chip Die Area ($A_{die}$)** breakdown, static and dynamic power dissipations ($P_{static}$, $P_{dynamic}$, $P_{sc}$, $P_{avg}$), Power-Delay Product (PDP), and Energy-Delay Product (EDP) for the **4-Word x 4-Bit Synchronous SRAM Register File**.
 
 To ensure 100% mathematical fidelity and eliminate web-browser KaTeX formatting limitations on GitHub, all step-by-step proofs, integral formulations, and verification matrices have been compiled into the publication-quality document **[`sram_calculations.pdf`](./sram_calculations.pdf)** and rendered as high-resolution engineering figures below:
 
@@ -756,25 +762,32 @@ Complete end-to-end read cycle latency ($t_{pd,read} = 185.90\,\text{ps}$), writ
   <img src="./images/calculations/07_top_level_sram_timing_and_delays.png" alt="Top-Level Timing, Delay and RC Interconnect Calculations" width="100%">
 </p>
 
+#### Setup Time (t_setup), Hold Time (t_hold) & Synchronous Clock Budget
+Complete derivations of Address Setup ($t_{setup,addr} = 187.51\,\text{ps}$), Write Data Setup ($t_{setup,DIN} = 165.03\,\text{ps}$), Read-to-SAE Setup ($156.25\,\text{ps}$), Wordline Cut-Off Offset ($\Delta t_{cut} = 15.63\,\text{ps}$), Write Data Hold ($t_{hold,DIN} = 15.60\,\text{ps}$), Address Hold ($t_{hold,addr} = 22.62\,\text{ps}$), Sense-Amp Latch Hold ($t_{hold,SA} = 24.23\,\text{ps}$), and Maximum Clock Frequency ($f_{max} = 1.98\,\text{GHz}$):
+
+<p align="center">
+  <img src="./images/calculations/08_top_level_setup_hold_timing.png" alt="Setup Time, Hold Time and Synchronous Clock Budget" width="100%">
+</p>
+
 #### Dynamic, Static, Short-Circuit Power Breakdown, PDP & EDP
 Macro-level standby leakage ($P_{static} = 84.60\,\text{nW}$), active dynamic switching power ($P_{dyn} = 68.42\,\mu\text{W}$), crowbar short-circuit power ($P_{sc} = 11.20\,\mu\text{W}$), total average dissipation ($P_{avg} = 79.71\,\mu\text{W}$ @ 100MHz), Power-Delay Product ($\text{PDP} = 14.82\,\text{fJ}$), and Energy-Delay Product ($\text{EDP} = 2754.7\,\text{fJ}\cdot\text{ps}$):
 
 <p align="center">
-  <img src="./images/calculations/08_top_level_sram_power_and_energy.png" alt="Top-Level Power, PDP, and EDP Calculations" width="100%">
+  <img src="./images/calculations/09_top_level_sram_power_and_energy.png" alt="Top-Level Power, PDP, and EDP Calculations" width="100%">
 </p>
 
 ---
 
-### 7.5 Master Performance Summary Table (Cell-by-Cell & Full-Chip)
+### 7.5 Master Performance Summary Table & GDSII Chip Die Area
 
 <p align="center">
-  <img src="./images/calculations/09_master_performance_summary_table.png" alt="Master Performance Summary Table and Physical Silicon Area" width="100%">
+  <img src="./images/calculations/10_master_summary_and_die_area.png" alt="Master Performance Summary Table and Chip Die Area" width="100%">
 </p>
 
 #### Summary Data (Pre-Layout Simulation @ 1.8V, 100MHz)
 | Circuit Block | MOSFET Count | tpLH (ps) | tpHL (ps) | tpd (ps) | tcd (ps) | Req (kΩ) | Ctotal (fF) | Pstatic (nW) | Pdyn (µW) | Psc (µW) | Pavg (µW) | PDP (fJ) | EDP (fJ·ps) |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
-| **CMOS Inverter** | 2 | 32.58 | 28.42 | **30.50** | **19.83** | 3.28 | 13.42 | 1.48 | 2.17 | 0.46 | **2.63** | 0.080 | 2.45 |
+| **CMOS Inverter** | 2 | 32.58 | 28.42 | **30.50** | **19.83** | 4.30 | 13.42 | 1.48 | 2.17 | 0.46 | **2.63** | 0.080 | 2.45 |
 | **2-Input CMOS NOR** | 4 | 40.51 | 35.34 | **37.93** | **23.52** | 3.28 | 16.69 | 3.51 | 1.01 | 0.39 | **1.40** | 0.053 | 2.02 |
 | **2:4 Row Decoder** | 20 | 136.50 | 126.61 | **131.56** | **44.98** | — | 31.92 | 17.64 | 14.85 | 2.45 | **17.32** | 2.278 | 299.7 |
 | **6T Bitcell (Write)** | 6 | 58.10 | 53.80 | **55.95** | **36.37** | 4.58 | 14.00 | 1.71 | 4.53 | 0.82 | **5.35** | 0.299 | 16.7 |
@@ -785,12 +798,28 @@ Macro-level standby leakage ($P_{static} = 84.60\,\text{nW}$), active dynamic sw
 | **SRAM Macro (Read)** | **208** | 193.90 | 177.90 | **185.90** | **98.90** | — | — | **84.60** | **68.42** | **11.20** | **79.71** | **14.82** | **2754.7** |
 | **SRAM Macro (Write)** | **208** | 169.50 | 156.10 | **162.80** | **81.35** | — | — | **84.60** | **68.42** | **11.20** | **79.71** | **12.98** | **2112.6** |
 
+> **Synchronous Timing Sign-Off**: `tsetup,macro = 187.51 ps` (`tsetup,DIN = 165.03 ps`) | `thold,macro = 24.23 ps` (`thold,addr = 22.62 ps`, `thold,DIN = 15.60 ps`) | `Max Skew = 74.67 ps` | `fmax = 1.98 GHz`.
+
+#### Chip Die Area & GDSII Layout Breakdown (`sram_final_4_bit.gds`, 1 µm = 2000 DBU)
+| GDSII Cell / Block | Instances | Width (µm) | Height (µm) | Area (µm²) | Total Share & Physical Description |
+| :--- | :---: | :---: | :---: | :---: | :--- |
+| **Unit CMOS Inverter (`inverter`)** | — | 3.50 | 5.20 | 18.20 | Standard leaf cell (Wn = 0.6 µm, Wp = 1.2 µm) |
+| **2-Input NOR (`2_input_NOR`)** | — | 5.30 | 6.00 | 31.80 | Wordline driver NOR leaf cell |
+| **Single 6T Bitcell (`sram_cell_6t`)** | 16 | 3.58 | 4.70 | 16.83 | 16 × 16.826 = 269.22 µm² (14.26% of die; 519.3 Lmin²) |
+| **Precharge Unit (`precharge_unit`)** | 4 | 5.80 | 4.90 | 28.42 | 4 × 28.42 = 113.68 µm² (6.02% of core die) |
+| **Write Driver (`write_driver`)** | 4 | 5.70 | 5.60 | 31.92 | 4 × 31.92 = 127.68 µm² (6.76% of core die) |
+| **Sense Amplifier (`sense_amp`)** | 4 | 6.10 | 6.40 | 39.04 | 4 × 39.04 = 156.16 µm² (8.27% of core die) |
+| **2:4 Row Decoder (`row_decoder_2to4`)** | 1 | 12.00 | 21.80 | 261.60 | 13.86% of core die; pitch-matched to 4 wordlines |
+| **4x1 Column Slice (`sram_core_array`)** | 4 | 11.80 | 25.15 | 296.77 | 4 × 296.77 = 1187.08 µm² (62.87% incl. bitline wiring) |
+| **Global Power & Routing Overhead** | — | — | — | 439.32 | 23.27% (VDD/GND M2/M3 rails & wordline bus straps) |
+| **Core Chip Die (`sram_final_4_bit`)** | **1** | **64.00** | **29.50** | **1888.00** | **Exact GDSII Core Macro Area (0.001888 mm², DRC/LVS Clean)** |
+
 ---
 
 ### 7.6 Pre-Layout vs. Post-Layout (RC Extracted) Verification Table
 
 <p align="center">
-  <img src="./images/calculations/10_pre_vs_post_layout_verification_table.png" alt="Pre vs Post Layout Verification and ADE Calculator Expressions" width="100%">
+  <img src="./images/calculations/11_pre_vs_post_layout_verification_table.png" alt="Pre vs Post Layout Verification and ADE Calculator Expressions" width="100%">
 </p>
 
 | Metric / Parameter | Pre-Layout (Schematic) | Post-Layout (av_extracted) | Delta (Δ) | Impact & Physical Interpretation |
@@ -801,15 +830,18 @@ Macro-level standby leakage ($P_{static} = 84.60\,\text{nW}$), active dynamic sw
 | **Row Decoder Delay (tpd,dec)** | 131.56 ps | **148.20 ps** | +12.6% | Metal2 wordline RC delay network |
 | **SRAM Read Access Delay (tpd,read)** | 185.90 ps | **214.50 ps** | +15.4% | Bitline wire resistance & sensing delay overhead |
 | **SRAM Write Access Delay (tpd,write)** | 162.80 ps | **188.20 ps** | +15.6% | Bitline discharge series resistance (Rwire ≈ 12 Ω) |
+| **Macro Setup Time (tsetup,macro)** | 187.51 ps | **212.88 ps** | +13.5% | Wordline RC + bitcell write transition parasitic shift |
+| **Macro Hold Time (thold,macro)** | 24.23 ps | **27.86 ps** | +15.0% | Sense latch node capacitance & WL RC fall extension |
 | **Macro Contamination Delay (tcd)** | 98.90 ps | **112.40 ps** | +13.6% | Layout delays shift both min and max bounds safely |
 | **Static Standby Power (Pstatic)** | 84.60 nW | **87.20 nW** | +3.1% | Substrate tap diode junction perimeter leakage |
 | **Total Average Power (Pavg @ 100MHz)** | 79.71 µW | **92.45 µW** | +16.0% | Parasitic interconnect capacitance charging |
 | **Power-Delay Product (PDP)** | 14.82 fJ | **19.83 fJ** | +33.8% | Combined delay and dynamic energy increase |
 | **Energy-Delay Product (EDP)** | 2754.7 fJ·ps | **4253.5 fJ·ps** | +54.4% | Second-order delay exponent scaling |
+| **Core Silicon Die Area (Adie,core)** | N/A | **1888.00 µm²** | — | Streamed GDSII bbox 64.00 µm × 29.50 µm (DRC/LVS clean) |
 
 ---
 
-### 7.7 Cadence Virtuoso ADE Calculator Syntax & Verification Equations
+### 7.7 Cadence Virtuoso ADE Calculator & SKILL Extraction Expressions
 
 The exact LISP expressions used to extract all delay and power metrics in Cadence Virtuoso ADE L / Explorer:
 
@@ -867,6 +899,14 @@ average(i("/V0/PLUS" ?result "tran") * 1.80) *
            ?wf2 v("/Out0" ?result "tran"), ?val2 0.90, ?edge2 "rising", ?nth2 1) + 
      delay(?wf1 v("/A0" ?result "tran"), ?val1 0.90, ?edge1 "rising", ?nth1 1, 
            ?wf2 v("/Out0" ?result "tran"), ?val2 0.90, ?edge2 "falling", ?nth2 1)) / 2.0 )**2 )
+
+;; 12. Setup Time (tsetup) & Hold Time (thold) via Parametric Capture Window Sweep
+cross(v("/WL0" ?result "tran") 0.90 1 "falling") - cross(v("/DIN0" ?result "tran") 0.90 1 "either") ; tsetup
+cross(v("/DIN0" ?result "tran") 0.90 2 "either") - cross(v("/WL0" ?result "tran") 0.90 1 "falling") ; thold
+
+;; 13. Core Chip Die Area Extraction (Cadence Virtuoso Layout XL SKILL)
+bBox = dbOpenCellViewByType("SRAM_Register_File" "sram_final_4_bit" "layout")~>bBox
+area = (xCoord(cadr(bBox)) - xCoord(car(bBox))) * (yCoord(cadr(bBox)) - yCoord(car(bBox))) ; 64.0 x 29.5 = 1888.00 um^2
 ```
 
 ---
